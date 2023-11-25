@@ -9,9 +9,9 @@ public class FilmCollection {
     private final Map<Integer, Film> films = new HashMap<Integer, Film>();
 
     public FilmCollection() {
-        generate();
+        init();
     }
-    public void generate() {
+    public void init() {
         for (int i = 1; i <= 100; i++) {
             Randomizer random = new Randomizer();
             Film film = random.getFilm();
