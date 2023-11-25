@@ -2,22 +2,60 @@ package org.example.model;
 
 import java.math.BigDecimal;
 
+
 public class Film {
-    private String title, genre, author;
+    private String id, title, genre, author, description;
     private int votes;
     private BigDecimal rating;
 
-    @Override
-    public String toString() {
-        return "\nTitle: " + title +
-                "\nGenre: " + genre +
-                "\nAuthor: " + author +
-                "\nVotes: " + votes +
-                "\nRating: " + rating;
-    }
-
     public Film() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", genre='" + genre + '\'' +
+                ", description='" + description + '\'' +
+                ", author='" + author + '\'' +
+                ", votes=" + votes +
+                ", rating=" + rating +
+                '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public BigDecimal getRating() {
+        return rating;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setTitle(String title) {
@@ -38,6 +76,10 @@ public class Film {
 
     public void setRating(BigDecimal rating) {
         this.rating = rating;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 

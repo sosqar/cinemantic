@@ -1,17 +1,15 @@
 package org.example;
 
-
 import org.example.model.Film;
-import org.example.service.Randomizer;
+import org.example.model.FilmCollection;
+
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        System.err.println("Hello and welcome!\n");
+        FilmCollection films = new FilmCollection();
+        films.generate();
+        films.getFilms();
 
-        for (int i = 1; i <= 5; i++) {
-            Randomizer random = new Randomizer();
-            Film film = random.getFilm();
-            System.out.println(film);
-        }
     }
 }

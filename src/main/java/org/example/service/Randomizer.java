@@ -1,36 +1,51 @@
 package org.example.service;
 
+import com.github.javafaker.Artist;
+import com.github.javafaker.Faker;
 import org.example.model.Film;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class Randomizer {
+    Faker faker = new Faker();
+    Map<Integer, Film> films = new HashMap<Integer, Film>();
 
     public Randomizer() {
 
     }
 
-    public String getTitle() {
-        String title = "Title ";
-        int number = getNumber(1, 1000);
-        return title + number;
+    public String getId() {
+        int length = 5;
+        String id;
+        id = UUID.randomUUID()
+                .toString()
+                .substring(0, length);
+        return id;
     }
 
+    public String getTitle() {
+        return faker.lorem().sentence(1, 4);
+    }
+
+
     public String getGenre() {
-        String genre = "Genre ";
-        int number = getNumber(1, 1000);
-        return genre + number;
+        String[] genres = {"Action", "Adventure", "Comedy", "Drama", "Horror", "Romance", "Science fiction", "Fantasy"
+                , "Historical", "Crime"};
+        int number = getNumber(0, 9);
+        return genres[number];
     }
 
     public String getAuthor() {
-        String author = "Author ";
-        int number = getNumber(1, 1000);
-        return author + number;
+        return faker.name().fullName();
     }
+
+    public String getDescription() {
+        return faker.lorem().paragraph();
+    }
+
 
     public int getNumber(int min, int max) {
         return (int) (Math.random() * (max - min + 1) + min);
@@ -67,8 +82,10 @@ public class Randomizer {
 
     public Film getFilm() {
         Film film = new Film();
+        film.setId(getId());
         film.setTitle(getTitle());
         film.setGenre(getGenre());
+        film.setDescription(getDescription());
         film.setAuthor(getAuthor());
         film.setVotes(getNumber(1, 10));
         film.setRating(getRating());
