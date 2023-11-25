@@ -4,9 +4,8 @@ import java.math.BigDecimal;
 
 
 public class Film {
-    private String id, title, genre, author, description;
+    private String id, title, genre, author, description, rating;
     private int votes;
-    private BigDecimal rating;
 
     public Film() {
 
@@ -18,8 +17,8 @@ public class Film {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", genre='" + genre + '\'' +
-                ", description='" + description + '\'' +
                 ", author='" + author + '\'' +
+                ", description='" + description + '\'' +
                 ", votes=" + votes +
                 ", rating=" + rating +
                 '}';
@@ -45,7 +44,7 @@ public class Film {
         return votes;
     }
 
-    public BigDecimal getRating() {
+    public String getRating() {
         return rating;
     }
 
@@ -74,7 +73,7 @@ public class Film {
         this.votes = votes;
     }
 
-    public void setRating(BigDecimal rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

@@ -1,11 +1,9 @@
 package org.example.service;
 
-import com.github.javafaker.Artist;
 import com.github.javafaker.Faker;
 import org.example.model.Film;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 
 
@@ -62,7 +60,7 @@ public class Randomizer {
         return votes;
     }
 
-    public BigDecimal getRating() {
+    public String getRating() {
         List<Integer> votes = getVotes();
 
         if (!votes.isEmpty()) {
@@ -71,10 +69,9 @@ public class Randomizer {
             for (int vote : votes) {
                 rating += vote;
             }
-            double avg = (double) rating / votes.size();
-            BigDecimal result = new BigDecimal(avg);
-            result = result.setScale(1, RoundingMode.DOWN);
-            return result;
+            double rate = (double) rating / votes.size();
+            DecimalFormat df = new DecimalFormat("#.0");
+            return df.format(rate);
         } else {
             return null;
         }
