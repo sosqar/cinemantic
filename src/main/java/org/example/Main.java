@@ -26,7 +26,7 @@ public class Main {
                 System.out.println((i + ": " + types[i]));
             }
             int choice = sc.nextInt();
-            if(choice == 3 ) {
+            if (choice == 3) {
                 break;
             }
             fas.getFilmsByFilterType(choice);

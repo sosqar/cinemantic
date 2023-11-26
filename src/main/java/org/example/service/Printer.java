@@ -9,6 +9,7 @@ public class Printer {
     public Printer() {
 
     }
+
     public void emptyArr() {
         System.err.println("Пустой массив");
     }
@@ -27,6 +28,7 @@ public class Printer {
         }
         printSeparator();
     }
+
     public void printSeparator() {
         System.out.println(
                 "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");

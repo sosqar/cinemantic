@@ -48,7 +48,6 @@ public class FiltersAndSorters {
     }
 
 
-
     private void getSortedFilmsByVotes() {
         if (films.isEmpty()) {
             printer.emptyArr();
