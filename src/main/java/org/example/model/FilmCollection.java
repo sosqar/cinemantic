@@ -100,9 +100,7 @@ public class FilmCollection {
             System.out.println(i + ": " + genres[i]);
         }
 
-        int selectedGenreIndex = Integer.parseInt(sc.nextLine());
-
-        String selectedGenre = getGenreByIndex(selectedGenreIndex);
+        String selectedGenre = genres[Integer.parseInt(sc.nextLine())];
 
         List<Film> filteredFilms = sortedFilms.stream()
                 .filter(film -> film.getGenre().equalsIgnoreCase(selectedGenre))
@@ -117,5 +115,7 @@ public class FilmCollection {
             }
         }
     }
+
+
 }
 
