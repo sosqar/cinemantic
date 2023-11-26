@@ -2,13 +2,15 @@ package org.example.model;
 
 
 public class Film {
+    private int id;
 
-    private String id;
+
+
     private String title;
     private String genre;
     private String author;
     private String description;
-    private String rating;
+//    private String rating;
     private int votes;
 
     public Film() {
@@ -17,27 +19,22 @@ public class Film {
 
     @Override
     public String toString() {
-        return "{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
+        return "{title='" + title + '\'' +
                 ", genre='" + genre + '\'' +
                 ", author='" + author + '\'' +
                 ", description='" + description + '\'' +
-                ", votes=" + votes +
-                ", rating=" + rating +
-                '}';
+                ", votes=" + votes + '}';
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getTitle() {
         return title;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setTitle(String title) {
@@ -68,13 +65,13 @@ public class Film {
         this.description = description;
     }
 
-    public String getRating() {
-        return rating;
-    }
+//    public String getRating() {
+//        return rating;
+//    }
 
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
+//    public void setRating(String rating) {
+//        this.rating = rating;
+//    }
 
     public int getVotes() {
         return votes;

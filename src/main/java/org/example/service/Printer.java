@@ -47,16 +47,16 @@ public class Printer {
         System.out.println("\n\n==== Все фильмы ====");
 
         // Печать заголовка таблицы
-        System.out.printf("%4s | %-40s | %-15s | %-30s | %-5s | %-5s%n", "ID",
-                "Title", "Genre", "Author", "Votes", "Rating");
+        System.out.printf("%4s | %-40s | %-15s | %-30s | %-5s", "ID",
+                "Title", "Genre", "Author", "Votes");
 
         printSeparator(120);
 
         // Печать данных о фильмах
         for (int i = 0; i < films.size(); i++) {
-            System.out.printf("%4s | %-40s | %-15s | %-30s | %5s | %5s%n",
+            System.out.printf("%4s | %-40s | %-15s | %-30s | %5s",
                     (i + 1), films.get(i).getTitle(), films.get(i).getGenre(), films.get(i).getAuthor(),
-                    films.get(i).getVotes(), films.get(i).getRating());
+                    films.get(i).getVotes());
         }
         printSeparator(120);
     }
