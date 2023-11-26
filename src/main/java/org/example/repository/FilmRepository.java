@@ -1,5 +1,6 @@
-package org.example.model;
+package org.example.repository;
 
+import org.example.model.Film;
 import org.example.service.Randomizer;
 
 import java.util.ArrayList;
@@ -7,10 +8,10 @@ import java.util.List;
 
 
 
-public class FilmList {
+public class FilmRepository {
     private final List<Film> films = new ArrayList<>();
 
-    public FilmList() {
+    public FilmRepository() {
         init();
     }
     private void init() {
