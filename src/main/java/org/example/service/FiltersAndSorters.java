@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.model.Film;
 import org.example.model.FilmList;
+import org.example.service.Printer;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,11 +11,13 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class FiltersAndSorters {
-    public List<Film> films = new ArrayList<>();
+    private final List<Film> films;
+    Printer printer = new Printer();
 
-    public FiltersAndSorters() {
-        FilmList filmList = new FilmList();
-
+    public FiltersAndSorters(List<Film> films) {
+        this.films = films;
+    }
+    public void makeChoice() {
         switch (getSortType()) {
             case 0:
                 getSortedFilmsByRating();
@@ -39,12 +42,10 @@ public class FiltersAndSorters {
     }
 
     public void getSortedFilmsByRating() {
-
         if(films.isEmpty()) {
-            System.err.println("Пустой массив");
+            printer.emptyArr();
         } else {
             films.sort(Comparator.comparing(Film::getRating).reversed());
-
             System.out.println("Фильмы, отсортированные по рейтингу:");
             for (int i = 0; i < films.size(); i++) {
                 System.out.println((i + 1) + ": " + films.get(i));
@@ -55,7 +56,7 @@ public class FiltersAndSorters {
 
     public void getSortedFilmsByVotes() {
         if(films.isEmpty()) {
-            System.err.println("Пустой массив");
+            printer.emptyArr();
         } else {
             films.sort(Comparator.comparing(Film::getVotes).reversed());
             System.out.println("Фильмы, отсортированныепо количеству оценок:");
@@ -67,7 +68,7 @@ public class FiltersAndSorters {
 
     public void getFiltredFilmsByGenre() {
         if(films.isEmpty()) {
-            System.err.println("Пустой массив");
+            printer.emptyArr();
         } else {
             String[] genres = {"Action", "Adventure", "Comedy", "Drama", "Horror", "Romance", "Science fiction", "Fantasy", "Historical", "Crime"};
 
@@ -94,3 +95,4 @@ public class FiltersAndSorters {
 
     }
 }
+

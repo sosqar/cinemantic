@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.model.Film;
+import org.example.model.FilmList;
 import org.example.service.FiltersAndSorters;
 
 
