@@ -15,7 +15,7 @@ public class Randomizer {
     }
 
     public String getId() {
-        int length = 5;
+        int length = 32;
         String id;
         id = UUID.randomUUID()
                 .toString()

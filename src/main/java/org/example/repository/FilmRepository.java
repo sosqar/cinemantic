@@ -15,7 +15,7 @@ public class FilmRepository {
     }
 
     private void init() {
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 5; i++) {
             Randomizer random = new Randomizer();
             Film film = random.getFilm();
             films.add(film);

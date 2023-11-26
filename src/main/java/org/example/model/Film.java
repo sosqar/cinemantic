@@ -2,7 +2,13 @@ package org.example.model;
 
 
 public class Film {
-    private String id, title, genre, author, description, rating;
+
+    private String id;
+    private String title;
+    private String genre;
+    private String author;
+    private String description;
+    private String rating;
     private int votes;
 
     public Film() {
@@ -30,27 +36,6 @@ public class Film {
         return title;
     }
 
-    public String getGenre() {
-        return genre;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public int getVotes() {
-        return votes;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-//    public String getDescription() {
-//        return description;
-//    }
-
-
     public void setId(String id) {
         this.id = id;
     }
@@ -59,26 +44,48 @@ public class Film {
         this.title = title;
     }
 
+    public String getGenre() {
+        return genre;
+    }
+
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    public void setVotes(int votes) {
-        this.votes = votes;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getRating() {
+        return rating;
     }
 
     public void setRating(String rating) {
         this.rating = rating;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 }
+
+
 
 
 

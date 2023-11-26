@@ -37,14 +37,14 @@ public class FiltersAndSorters {
         films.sort(Comparator.comparing(Film::getRating).reversed());
         System.out.println("\nФильмы, отсортированные по рейтингу:\n");
         System.out.printf("%-5s | %-40s | %-5s%n", "ID", "Title", "Rating");
-        printer.printSeparator();
+        printer.printSeparator(10);
 
         // Печать данных о фильмах
         for (Film film : films) {
             System.out.printf("%-5s | %-40s | %-5s%n",
                     film.getId(), film.getTitle(), film.getRating());
         }
-        printer.printSeparator();
+        printer.printSeparator(10);
     }
 
 
@@ -56,12 +56,12 @@ public class FiltersAndSorters {
         films.sort(Comparator.comparing(Film::getVotes).reversed());
         System.out.println("\nФильмы, отсортированныепо количеству оценок:\n");
         System.out.printf("%-5s | %-40s | %-5s%n", "ID", "Title", "Votes");
-        printer.printSeparator();
+        printer.printSeparator(10);
 
         for (Film film : films) {
             System.out.printf("%-5s | %-40s | %-5s%n", film.getId(), film.getTitle(), film.getVotes());
         }
-        printer.printSeparator();
+        printer.printSeparator(10);
 
     }
 
@@ -84,7 +84,7 @@ public class FiltersAndSorters {
         } else {
             System.out.println("\nФильмы, отфильтрованные по жанру " + selectedGenre + ":\n");
             System.out.printf("%-5s | %-40s | %-15s | %-5s | %-5s%n", "ID", "Title", "Genre", "Rating", "Votes");
-            printer.printSeparator();
+            printer.printSeparator(10);
             for (Film filteredFilm : filteredFilms) {
                 System.out.printf("%-5s | %-40s | %-15s | %-5s | %-5s%n", filteredFilm.getId(),
                         filteredFilm.getTitle(), filteredFilm.getGenre(),
