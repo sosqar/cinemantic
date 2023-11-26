@@ -9,7 +9,6 @@ import java.util.*;
 
 public class Randomizer {
     Faker faker = new Faker();
-    Map<Integer, Film> films = new HashMap<Integer, Film>();
 
     public Randomizer() {
 
@@ -25,7 +24,7 @@ public class Randomizer {
     }
 
     public String getTitle() {
-        return faker.lorem().sentence(1, 4);
+        return faker.lorem().sentence(1, 3);
     }
 
 

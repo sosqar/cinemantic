@@ -16,8 +16,8 @@ public class FiltersAndSorters {
         this.films = films;
     }
 
-    public void getFilmsByFilterType(int filterType) {
-        switch (filterType) {
+    public void getFilmsByFilterType(int choice) {
+        switch (choice) {
             case 0:
                 getSortedFilmsByRating();
                 break;
@@ -33,28 +33,36 @@ public class FiltersAndSorters {
     private void getSortedFilmsByRating() {
         if (films.isEmpty()) {
             printer.emptyArr();
-        } else {
-            films.sort(Comparator.comparing(Film::getRating).reversed());
-            System.out.println("Фильмы, отсортированные по рейтингу:");
-
-            for (int i = 0; i < films.size(); i++) {
-                Film film = films.get(i);
-                System.out.println((i + 1) + ": Title: " + film.getTitle() + " Rating: " + film.getRating());
-            }
         }
+        films.sort(Comparator.comparing(Film::getRating).reversed());
+        System.out.println("\nФильмы, отсортированные по рейтингу:\n");
+        System.out.printf("%-5s | %-40s | %-5s%n", "ID", "Title", "Rating");
+        printer.printSeparator();
 
+        // Печать данных о фильмах
+        for (Film film : films) {
+            System.out.printf("%-5s | %-40s | %-5s%n",
+                    film.getId(), film.getTitle(), film.getRating());
+        }
+        printer.printSeparator();
     }
+
+
 
     private void getSortedFilmsByVotes() {
         if (films.isEmpty()) {
             printer.emptyArr();
         }
+
         films.sort(Comparator.comparing(Film::getVotes).reversed());
-        System.out.println("Фильмы, отсортированныепо количеству оценок:");
-        for (int i = 0; i < films.size(); i++) {
-            Film film = films.get(i);
-            System.out.println((i + 1) + ": Title: " + film.getTitle() + "Votes: " + film.getVotes());
+        System.out.println("\nФильмы, отсортированныепо количеству оценок:\n");
+        System.out.printf("%-5s | %-40s | %-5s%n", "ID", "Title", "Votes");
+        printer.printSeparator();
+
+        for (Film film : films) {
+            System.out.printf("%-5s | %-40s | %-5s%n", film.getId(), film.getTitle(), film.getVotes());
         }
+        printer.printSeparator();
 
     }
 
@@ -73,14 +81,17 @@ public class FiltersAndSorters {
                 .toList();
 
         if (filteredFilms.isEmpty()) {
-            System.out.println("Фильмы с выбранным жанром отсутствуют.");
+            System.out.println("\nФильмы с выбранным жанром отсутствуют.\n");
+        } else {
+            System.out.println("\nФильмы, отфильтрованные по жанру " + selectedGenre + ":\n");
+            System.out.printf("%-5s | %-40s | %-15s | %-5s | %-5s%n", "ID", "Title", "Genre", "Rating", "Votes");
+            printer.printSeparator();
+            for (Film filteredFilm : filteredFilms) {
+                System.out.printf("%-5s | %-40s | %-15s | %-5s | %-5s%n", filteredFilm.getId(),
+                        filteredFilm.getTitle(), filteredFilm.getGenre(),
+                        filteredFilm.getRating(), filteredFilm.getVotes());
+            }
         }
-        System.out.println("Фильмы, отфильтрованные по жанру " + selectedGenre + ":");
-        for (Film filteredFilm : filteredFilms) {
-            System.out.println(filteredFilm);
-        }
-
-
     }
 }
 

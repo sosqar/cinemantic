@@ -1,7 +1,5 @@
 package org.example.model;
 
-import java.math.BigDecimal;
-
 
 public class Film {
     private String id, title, genre, author, description, rating;
@@ -48,9 +46,9 @@ public class Film {
         return rating;
     }
 
-    public String getDescription() {
-        return description;
-    }
+//    public String getDescription() {
+//        return description;
+//    }
 
 
     public void setId(String id) {

@@ -3,6 +3,7 @@ package org.example;
 import org.example.model.Film;
 import org.example.repository.FilmRepository;
 import org.example.service.FiltersAndSorters;
+import org.example.service.Printer;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,9 +13,8 @@ public class Main {
     public static void main(String[] args) {
         //Init
         List<Film> films = new FilmRepository().getFilms();
-        for (Film film : films) {
-            System.out.println(film);
-        }
+        Printer printer = new Printer();
+        printer.printFilmsTable(films);
         FiltersAndSorters fas = new FiltersAndSorters(films);
 
 
