@@ -2,7 +2,8 @@ package org.example.service;
 
 import org.example.model.Film;
 
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 
 public class Printer {

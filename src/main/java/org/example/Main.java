@@ -2,10 +2,6 @@ package org.example;
 
 import org.example.model.Film;
 import org.example.repository.FilmRepository;
-import org.example.repository.OldFilmRepository;
-import org.example.service.Printer;
-
-import java.util.List;
 
 
 public class Main {
@@ -23,8 +19,7 @@ public class Main {
         }
 
     }
-
-    //Init
+//Init
 //        List<Film> films = new FilmRepository1().getFilms();
 //        Printer printer = new Printer();
 //        FiltersAndSorters fas = new FiltersAndSorters(films);

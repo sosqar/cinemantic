@@ -3,10 +3,9 @@ package org.example.repository;
 import org.example.config.ConnectionManager;
 import org.example.model.Film;
 
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import java.sql.*;
 
 public class FilmRepository {
     private final Logger LOGGER = Logger.getLogger(FilmRepository.class.getName());
