@@ -3,9 +3,6 @@ package org.example.model;
 
 public class Film {
     private int id;
-
-
-
     private String title;
     private String genre;
     private String author;
@@ -13,9 +10,13 @@ public class Film {
 //    private String rating;
     private int votes;
 
+    public Film(int id, String title) {
+
+    }
     public Film() {
 
     }
+
 
     @Override
     public String toString() {

@@ -2,19 +2,24 @@ package org.example;
 
 import org.example.model.Film;
 import org.example.repository.FilmRepository;
-
-
-import java.util.List;
-import java.util.Scanner;
-
+import org.example.service.Randomizer;
 
 public class Main {
     public static void main(String[] args) {
-        Film film = new Film();
-        FilmRepository fr = new FilmRepository();
+        Randomizer random = new Randomizer();
+        FilmRepository filmRepository = new FilmRepository();
+        Film film = random.getFilm();
+        Film response = filmRepository.findByName("Qui fugiat nihil.");
+        if (response != null) {
+            System.out.println("Film ID: " + response.getId());
+            System.out.println("Film Title: " + response.getTitle());
+        } else {
+            System.out.println("Фильм не найден.");
+        }
+
     }
 
-        //Init
+    //Init
 //        List<Film> films = new FilmRepository1().getFilms();
 //        Printer printer = new Printer();
 //        FiltersAndSorters fas = new FiltersAndSorters(films);

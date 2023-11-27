@@ -9,15 +9,18 @@ import java.sql.*;
 
 public class FilmRepository {
     private final Logger LOGGER = Logger.getLogger(FilmRepository.class.getName());
-    String URL = "jdbc:postgresql://localhost:5432/localCinemantic";
-    String USER = "postgres";
-    String PASS = "postgres";
+    private static final String SQL_SAVE = "INSERT INTO films (title, genre, author, description, votes, " +
+            "created_date) VALUES " +
+            "(?, ?, ?, ?, ?, TO_TIMESTAMP('2023-11-26 14:30:00', 'YYYY-MM-DD HH24:MI:SS'))";
+    private static final String SQL_FIND_BY_NAME = "SELECT * FROM films where title =?";
+    final String URL = "jdbc:postgresql://localhost:5432/localCinemantic";
+    final String USER = "postgres";
+    final String PASS = "postgres";
 
-    public void createFilm(Film film) {
-        String sql = "INSERT INTO films (title, genre, author, description, votes, created_date) VALUES (?, ?, ?, ?, ?, TO_TIMESTAMP('2023-11-26 14:30:00', 'YYYY-MM-DD HH24:MI:SS'))";
-
+    public void save(Film film) {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASS);
-             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE,
+                     Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, film.getTitle());
             preparedStatement.setString(2, film.getGenre());
             preparedStatement.setString(3, film.getAuthor());
@@ -43,18 +46,28 @@ public class FilmRepository {
         }
     }
 
-//    public Film getFilmById(int id) {
-//
-//        return null;
-//    }
+    public Film findByName(String query) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASS)) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_NAME)) {
+
+                preparedStatement.setString(1, query);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        int id = resultSet.getInt("id");
+                        String title = resultSet.getString("title");
+                        return new Film(id, title);
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 }
-
-//
-//    public void updateFilm(Film film) {
-//        // Логика для обновления записи в базе данных
-//    }
-//
-//    public void deleteFilm(int id) {
-//        // Логика для удаления записи из базы данных по ID
-//    }
-
