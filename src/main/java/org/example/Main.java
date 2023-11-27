@@ -2,12 +2,18 @@ package org.example;
 
 import org.example.model.Film;
 import org.example.repository.FilmRepository;
-import org.example.service.Randomizer;
+import org.example.repository.OldFilmRepository;
+import org.example.service.Printer;
+
+import java.util.List;
+
 
 public class Main {
+
+
     public static void main(String[] args) {
-        FilmRepository filmRepository = new FilmRepository();
-        Film film = filmRepository.findByTitle("Qui fugiat nihil.");
+        FilmRepository fr = new FilmRepository();
+        Film film = fr.findByTitle("Qui fugiat nihil.");
         if (film != null) {
             System.out.println("Film ID: " + film.getId());
             System.out.println("Film Title: " + film.getTitle());
