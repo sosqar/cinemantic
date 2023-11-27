@@ -10,8 +10,10 @@ public class Film {
 //    private String rating;
     private int votes;
 
-    public Film(int id, String title) {
-
+    public Film(int id, String title, String author) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
     }
     public Film() {
 

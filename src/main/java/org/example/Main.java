@@ -6,13 +6,12 @@ import org.example.service.Randomizer;
 
 public class Main {
     public static void main(String[] args) {
-        Randomizer random = new Randomizer();
         FilmRepository filmRepository = new FilmRepository();
-        Film film = random.getFilm();
-        Film response = filmRepository.findByName("Qui fugiat nihil.");
-        if (response != null) {
-            System.out.println("Film ID: " + response.getId());
-            System.out.println("Film Title: " + response.getTitle());
+        Film film = filmRepository.findByTitle("Qui fugiat nihil.");
+        if (film != null) {
+            System.out.println("Film ID: " + film.getId());
+            System.out.println("Film Title: " + film.getTitle());
+            System.out.println("Film Author: " + film.getAuthor());
         } else {
             System.out.println("Фильм не найден.");
         }

@@ -1,5 +1,6 @@
 package org.example.repository;
 
+import org.example.config.ConnectionManager;
 import org.example.model.Film;
 
 import java.util.logging.Level;
@@ -13,12 +14,9 @@ public class FilmRepository {
             "created_date) VALUES " +
             "(?, ?, ?, ?, ?, TO_TIMESTAMP('2023-11-26 14:30:00', 'YYYY-MM-DD HH24:MI:SS'))";
     private static final String SQL_FIND_BY_NAME = "SELECT * FROM films where title =?";
-    final String URL = "jdbc:postgresql://localhost:5432/localCinemantic";
-    final String USER = "postgres";
-    final String PASS = "postgres";
 
     public void save(Film film) {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASS);
+        try (Connection connection = ConnectionManager.getConnect();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE,
                      Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, film.getTitle());
@@ -46,25 +44,21 @@ public class FilmRepository {
         }
     }
 
-    public Film findByName(String query) {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASS)) {
-            try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_NAME)) {
+    public Film findByTitle(String query) {
+        try (Connection connection = ConnectionManager.getConnect();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_NAME)) {
+            preparedStatement.setString(1, query);
 
-                preparedStatement.setString(1, query);
-
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    while (resultSet.next()) {
-                        int id = resultSet.getInt("id");
-                        String title = resultSet.getString("title");
-                        return new Film(id, title);
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String title = resultSet.getString("title");
+                    String author = resultSet.getString("author");
+                    return new Film(id, title, author);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
