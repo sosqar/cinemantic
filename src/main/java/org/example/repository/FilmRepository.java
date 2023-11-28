@@ -9,10 +9,12 @@ import java.util.logging.Logger;
 
 public class FilmRepository {
     private final Logger LOGGER = Logger.getLogger(FilmRepository.class.getName());
-    private static final String SQL_SAVE = "INSERT INTO films (title, genre, author, description, votes, " +
+    private static final String SQL_SAVE = "insert into films (title, genre, author, description, votes, " +
             "created_date) VALUES " +
             "(?, ?, ?, ?, ?, TO_TIMESTAMP('2023-11-26 14:30:00', 'YYYY-MM-DD HH24:MI:SS'))";
-    private static final String SQL_FIND_BY_NAME = "SELECT * FROM films where title =?";
+    private static final String SQL_FIND_BY_NAME = "select * from films where title =?";
+    private static final String SQL_FIND_BY_ID = "select * from films where id = ?";
+    private static final String SQL_DELETE_BY_ID = "delete from films where id = ?";
 
     public void save(Film film) {
         try (Connection connection = ConnectionManager.getConnect();
@@ -62,5 +64,53 @@ public class FilmRepository {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    public Film findById(int query) {
+        try (Connection connection = ConnectionManager.getConnect(); PreparedStatement preparedStatement =
+                connection.prepareStatement(SQL_FIND_BY_ID)) {
+            preparedStatement.setInt(1, query);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String title = resultSet.getString("title");
+                    String author = resultSet.getString("author");
+                    return new Film(id, title, author);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+    }
+
+    public Film deleteById(int query) {
+        Film deletedFilm = findById(query);
+
+        if (deletedFilm != null) {
+            try (Connection connection = ConnectionManager.getConnect(); PreparedStatement preparedStatement =
+                    connection.prepareStatement(SQL_DELETE_BY_ID)) {
+
+                preparedStatement.setInt(1, query);
+                int affectedRows = preparedStatement.executeUpdate();
+                if (affectedRows <= 0) {
+                    throw new SQLException("Ошибка при удалении фильма. Ни одна запись не была изменена");
+                }
+
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (deletedFilm != null) {
+            System.out.println("Фильм успешно удален:");
+            System.out.println("ID: " + deletedFilm.getId());
+            System.out.println("Title: " + deletedFilm.getTitle());
+            System.out.println("Author: " + deletedFilm.getAuthor());
+        }
+        return deletedFilm;
     }
 }

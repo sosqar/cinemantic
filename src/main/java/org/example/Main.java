@@ -9,14 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         FilmRepository fr = new FilmRepository();
-        Film film = fr.findByTitle("Qui fugiat nihil.");
-        if (film != null) {
-            System.out.println("Film ID: " + film.getId());
-            System.out.println("Film Title: " + film.getTitle());
-            System.out.println("Film Author: " + film.getAuthor());
-        } else {
-            System.out.println("Фильм не найден.");
-        }
+        Film film = fr.deleteById(39);
 
     }
 //Init
