@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         FilmRepository fr = new FilmRepository();
-        Film film = fr.deleteById(39);
+        Film film = fr.updateFilm("Thriller / Horror", "Azhara Izbasarova", "На Веранде происходят странные вещи, аж кровь стынет.", 22);
 
     }
 //Init

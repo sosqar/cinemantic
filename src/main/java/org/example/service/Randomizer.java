@@ -9,9 +9,6 @@ import java.util.*;
 public class Randomizer {
     Faker faker = new Faker();
 
-    public Randomizer() {
-
-    }
 
     public String getId() {
         int length = 32;
@@ -81,7 +78,6 @@ public class Randomizer {
         film.setDescription(getDescription());
         film.setAuthor(getAuthor());
         film.setVotes(getVotes());
-//        film.setRating(getRating());
 
         return film;
     }

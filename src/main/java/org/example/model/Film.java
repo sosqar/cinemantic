@@ -7,16 +7,24 @@ public class Film {
     private String genre;
     private String author;
     private String description;
-//    private String rating;
+    //    private String rating;
     private int votes;
+
+    public Film() {
+    }
+    public Film(int id, String title, String genre, String author, String description) {
+        this.id = id;
+        this.title = title;
+        this.genre = genre;
+        this.author = author;
+        this.description = description;
+    }
+
 
     public Film(int id, String title, String author) {
         this.id = id;
         this.title = title;
         this.author = author;
-    }
-    public Film() {
-
     }
 
 
@@ -36,6 +44,7 @@ public class Film {
     public void setId(int id) {
         this.id = id;
     }
+
     public String getTitle() {
         return title;
     }
