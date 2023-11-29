@@ -9,9 +9,8 @@ import java.util.logging.Logger;
 
 public class FilmRepository {
     private final Logger LOGGER = Logger.getLogger(FilmRepository.class.getName());
-    private static final String SQL_SAVE = "insert into films (title, genre, author, description, votes, " +
-            "created_date) VALUES " +
-            "(?, ?, ?, ?, ?, TO_TIMESTAMP('2023-11-26 14:30:00', 'YYYY-MM-DD HH24:MI:SS'))";
+    private static final String SQL_SAVE = "insert into films (title, genre, author, description, votes) VALUES " +
+            "(?, ?, ?, ?, ?)";
     private static final String SQL_FIND_BY_TITLE = "select * from films where title =?";
     private static final String SQL_FIND_BY_ID = "select * from films where id = ?";
     private static final String SQL_DELETE_BY_ID = "delete from films where id = ?";

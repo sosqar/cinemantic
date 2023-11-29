@@ -1,9 +1,13 @@
 package org.example.service;
 
 import com.github.javafaker.Faker;
-import org.example.model.Film;
+import org.example.model.Author;
 
-import java.util.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 
 public class Randomizer {
@@ -24,16 +28,7 @@ public class Randomizer {
     }
 
 
-    public String getGenre() {
-        String[] genres = {"Action", "Adventure", "Comedy", "Drama", "Horror", "Romance", "Science fiction", "Fantasy"
-                , "Historical", "Crime"};
-        int number = getNumber(0, 9);
-        return genres[number];
-    }
 
-    public String getAuthor() {
-        return faker.name().fullName();
-    }
 
     public String getDescription() {
         return faker.lorem().paragraph();
@@ -71,15 +66,29 @@ public class Randomizer {
 //        }
 //    }
 
-    public Film getFilm() {
-        Film film = new Film();
-        film.setTitle(getTitle());
-        film.setGenre(getGenre());
-        film.setDescription(getDescription());
-        film.setAuthor(getAuthor());
-        film.setVotes(getVotes());
-
-        return film;
+    public Timestamp getCreated_at() {
+        return Timestamp.valueOf(LocalDateTime.now());
     }
 
+    public String getFullName() {
+        return faker.name().fullName();
+    }
+
+//    public Film getFilm() {
+//        Film film = new Film();
+//        film.setTitle(getTitle());
+
+//        film.setDescription(getDescription());
+//        film.setVotes(getVotes());
+//
+//        return film;
+//    }
+
+    public Author getAuthor() {
+
+        Author author = new Author();
+        author.setFullName(getFullName());
+
+        return author;
+    }
 }

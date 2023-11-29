@@ -1,14 +1,17 @@
 package org.example.model;
 
 
+import java.sql.Timestamp;
+
 public class Film {
     private int id;
     private String title;
     private String genre;
     private String author;
     private String description;
-    //    private String rating;
+    private double rating;
     private int votes;
+    private Timestamp createdAt;
 
     public Film() {
     }
@@ -21,11 +24,7 @@ public class Film {
     }
 
 
-    public Film(int id, String title, String author) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-    }
+
 
 
     @Override
@@ -91,6 +90,13 @@ public class Film {
 
     public void setVotes(int votes) {
         this.votes = votes;
+    }
+
+    public Timestamp getCreatedAt(){
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {this.createdAt = createdAt;
     }
 }
 
