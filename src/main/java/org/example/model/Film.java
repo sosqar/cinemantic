@@ -22,11 +22,6 @@ public class Film {
         this.author = author;
         this.description = description;
     }
-
-
-
-
-
     @Override
     public String toString() {
         return "{title='" + title + '\'' +

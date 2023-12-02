@@ -7,8 +7,16 @@ public class Genre {
     private String name;
     private Timestamp createdAt;
 
-    public Genre(String name) {
+
+    public Genre(Long id, String name) {
+        this.id = id;
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "{id = '" + id + '\'' +
+                ", name = '" + name + '}';
     }
 
     public Long getId() {
