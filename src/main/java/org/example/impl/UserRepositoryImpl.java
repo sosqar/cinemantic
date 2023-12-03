@@ -16,13 +16,14 @@ import java.util.logging.Logger;
 
 public class UserRepositoryImpl implements UserRepository {
     final int length = 32;
-    private final Logger LOGGER = Logger.getLogger(FilmRepositoryImpl.class.getName());
+    private final Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class.getName());
     private static final String SQL_SAVE = "insert into users (id, username, created_at) VALUES (?, ?, ?)";
     private static final String SQL_FIND_BY_ID = "select * from users where id = ?";
-    private static final String SQL_FIND_BY_USERNAME = "select * from users where username =?";
+    private static final String SQL_FIND_BY_USERNAME = "select * from users where username = ?";
     private static final String SQL_FIND_ALL = "select * from users";
     private static final String SQL_UPDATE_USER_BY_ID = "update users set username = ? where id = ?";
-    private static final String SQL_DELETE_BY_ID = "delete from films where id = ?";
+    private static final String SQL_DELETE_BY_ID = "delete from users where id = ?";
+    private static final String SQL_DELETE_BY_USERNAME = "delete from users where username = ?";
 
     @Override
     public void create(String username) {
@@ -33,11 +34,11 @@ public class UserRepositoryImpl implements UserRepository {
             preparedStatement.setString(2, username);
             preparedStatement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
             preparedStatement.executeUpdate();
-
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Произошла ошибка", e);
         }
     }
+
     @Override
     public User findById(String id) {
         try (Connection connection = ConnectionManager.getConnect();
@@ -49,16 +50,17 @@ public class UserRepositoryImpl implements UserRepository {
                     String uuid = resultSet.getString("id");
                     String username = resultSet.getString("username");
                     Timestamp createdAt = resultSet.getTimestamp("created_at");
-                    return new User(uuid, username,createdAt);
+                    return new User(uuid, username, createdAt);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.log(Level.SEVERE, "Произошла ошибка", e);
         }
         return null;
     }
+
     @Override
     public User findByUsername(String username) {
         try (Connection connection = ConnectionManager.getConnect();
@@ -70,16 +72,17 @@ public class UserRepositoryImpl implements UserRepository {
                     String uuid = resultSet.getString("id");
                     String name = resultSet.getString("username");
                     Timestamp createdAt = resultSet.getTimestamp("created_at");
-                    return new User(uuid, username,createdAt);
+                    return new User(uuid, username, createdAt);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.log(Level.SEVERE, "Произошла ошибка", e);
         }
         return null;
     }
+
     public List<User> showAll() {
         List<User> userList = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnect();
@@ -95,7 +98,7 @@ public class UserRepositoryImpl implements UserRepository {
                 throw new RuntimeException(e);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.log(Level.SEVERE, "Произошла ошибка", e);
         }
         return userList;
     }
@@ -117,18 +120,37 @@ public class UserRepositoryImpl implements UserRepository {
                     throw new SQLException("Ошибка при редактировании пользователя.");
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                LOGGER.log(Level.SEVERE, "Произошла ошибка", e);
             }
         } else {
             System.out.println("Пользователь не найден");
         }
-        User updatedUser = findById(id);
-        return updatedUser;
+        return findById(id);
     }
 
     @Override
-    public void deleteById(String id) {
+    public User deleteById(String id) {
+        User deletedUser = findById(id);
 
+        if (deletedUser != null) {
+            try (Connection connection = ConnectionManager.getConnect(); PreparedStatement preparedStatement =
+                    connection.prepareStatement(SQL_DELETE_BY_ID)) {
+
+                preparedStatement.setString(1, id);
+                int affectedRows = preparedStatement.executeUpdate();
+                if (affectedRows <= 0) {
+                    throw new SQLException("Ошибка при удалении пользователя. Ни одна запись не была изменена");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (deletedUser != null) {
+            System.out.println("Пользователь успешно удален:");
+            System.out.println("ID: " + deletedUser.getId());
+            System.out.println("Username: " + deletedUser.getUsername());
+        }
+        return deletedUser;
     }
 
     @Override
