@@ -1,7 +1,6 @@
 package org.example.service;
 
 import com.github.javafaker.Faker;
-import org.example.model.Author;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -13,20 +12,16 @@ import java.util.UUID;
 public class Randomizer {
     Faker faker = new Faker();
 
-
-    public String getId() {
-        int length = 32;
-        String id;
-        id = UUID.randomUUID()
-                .toString()
-                .substring(0, length);
-        return id;
-    }
-
     public String getTitle() {
         return faker.lorem().sentence(1, 4);
     }
+    public String getUsername() {
+        return faker.name().username();
+    }
 
+    public String getId() {
+        return faker.internet().uuid();
+    }
 
 
 
@@ -50,45 +45,11 @@ public class Randomizer {
         return votes.size();
     }
 
-//    public String getRating() {
-//
-//        if (!votes.isEmpty()) {
-//            int rating = 0;
-//
-//            for (int vote : votes) {
-//                rating += vote;
-//            }
-//            double rate = (double) rating / votes.size();
-//            DecimalFormat df = new DecimalFormat("#.0");
-//            return df.format(rate);
-//        } else {
-//            return null;
-//        }
-//    }
-
     public Timestamp getCreated_at() {
         return Timestamp.valueOf(LocalDateTime.now());
     }
 
     public String getFullName() {
         return faker.name().fullName();
-    }
-
-//    public Film getFilm() {
-//        Film film = new Film();
-//        film.setTitle(getTitle());
-
-//        film.setDescription(getDescription());
-//        film.setVotes(getVotes());
-//
-//        return film;
-//    }
-
-    public Author getAuthor() {
-
-        Author author = new Author();
-        author.setFullName(getFullName());
-
-        return author;
     }
 }

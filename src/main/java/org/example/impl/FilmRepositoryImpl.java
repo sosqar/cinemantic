@@ -1,20 +1,22 @@
-package org.example.repository;
+package org.example.impl;
 
 import org.example.config.ConnectionManager;
 import org.example.model.Film;
+import org.example.service.FilmRepository;
 
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FilmRepository {
+public class FilmRepositoryImpl implements FilmRepository{
     private final Logger LOGGER = Logger.getLogger(FilmRepository.class.getName());
     private static final String SQL_SAVE = "insert into films (title, genre, author, description, votes) VALUES " +
             "(?, ?, ?, ?, ?)";
     private static final String SQL_FIND_BY_TITLE = "select * from films where title =?";
     private static final String SQL_FIND_BY_ID = "select * from films where id = ?";
     private static final String SQL_DELETE_BY_ID = "delete from films where id = ?";
-    private static final String SQL_UPDATE_FILM_BY_ID = "update films set genre = ?, author = ?, description = ? where id = ?";
+    private static final String SQL_UPDATE_FILM_BY_ID = "update films set genre = ?, author = ?, description = ? " +
+            "where id = ?";
 
     public void save(Film film) {
         try (Connection connection = ConnectionManager.getConnect();
@@ -117,7 +119,7 @@ public class FilmRepository {
         return deletedFilm;
     }
 
-    public Film updateFilm(String newGenre, String newAuthor, String newDescription,int id) {
+    public Film updateFilm(String newGenre, String newAuthor, String newDescription, int id) {
         Film targetFilm = findById(id);
 
         if (targetFilm != null) {

@@ -1,63 +1,39 @@
 package org.example.model;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
+import java.util.UUID;
 
 public class User {
-    private Long id;
-    private String first_name;
-    private String second_name;
-    private String sex;
-    private String email;
-    private LocalDate birthDate;
+    private String id;
+    private String username;
     private Timestamp createdAt;
 
-    public Long getId() {
+    public User() {
+    }
+    public User(String id, String username, Timestamp createdAt) {
+        this.id = id;
+        this.username = username;
+        this.createdAt = createdAt;
+    }
+
+    public User(String username) {
+        this.username = username;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getSecond_name() {
-        return second_name;
-    }
-
-    public void setSecond_name(String second_name) {
-        this.second_name = second_name;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Timestamp getCreatedAt() {
@@ -66,5 +42,10 @@ public class User {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "\nid: " + id + ',' + " username: " + username;
     }
 }

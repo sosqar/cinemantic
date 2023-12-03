@@ -3,12 +3,12 @@ package org.example.model;
 import java.sql.Timestamp;
 
 public class Genre {
-    private Long id;
+    private int id;
     private String name;
     private Timestamp createdAt;
 
 
-    public Genre(Long id, String name) {
+    public Genre(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -19,11 +19,11 @@ public class Genre {
                 ", name = '" + name + '}';
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

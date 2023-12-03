@@ -1,17 +1,21 @@
-package org.example.repository;
+package org.example.impl;
 
 import org.example.config.ConnectionManager;
 import org.example.model.Genre;
+import org.example.service.GenreRepository;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class GenreRepository {
+public class GenreRepositoryImpl implements GenreRepository {
+    private final Logger LOGGER = Logger.getLogger(GenreRepository.class.getName());
     private static final String SQL_SAVE = "insert into genres (name, created_at) VALUES (?, ?)";
     private static final String SQL_FIND_BY_NAME = "select * from genres where name = ?";
     private static final String SQL_DELETE_BY_ID = "delete from genres where id = ?";
 
-    public void save (Genre genre) {
+    public void save(Genre genre) {
         try (Connection connection = ConnectionManager.getConnect();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE,
                      Statement.RETURN_GENERATED_KEYS)) {
@@ -24,7 +28,7 @@ public class GenreRepository {
             if (affectedRows > 0) {
                 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
-                        genre.setId((long) generatedKeys.getInt(1));
+                        genre.setId(generatedKeys.getInt(1));
                     } else {
                         throw new SQLException("Ошибка при получении ID.");
                     }
@@ -37,6 +41,7 @@ public class GenreRepository {
             throw new RuntimeException(e);
         }
     }
+
     public Genre findByName(String query) {
         try (Connection connection = ConnectionManager.getConnect(); PreparedStatement preparedStatement =
                 connection.prepareStatement(SQL_FIND_BY_NAME)) {
@@ -45,7 +50,7 @@ public class GenreRepository {
                 while (resultSet.next()) {
                     int id = resultSet.getInt("id");
                     String name = resultSet.getString("name");
-                    return new Genre((long) id, name);
+                    return new Genre(id, name);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -71,10 +76,8 @@ public class GenreRepository {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
-            System.out.println("Жанр успешно удален:");
-            System.out.println("ID: " + deletedGenre.getId());
-            System.out.println("Title: " + deletedGenre.getName());
+            LOGGER.log(Level.SEVERE,
+                    "Жанр успешно удален:\n id: " + deletedGenre.getId() + "\nname: " + deletedGenre.getName());
         }
         return deletedGenre;
     }

@@ -3,15 +3,25 @@ package org.example.model;
 import java.sql.Timestamp;
 
 public class Author {
-    private Long id;
+    private int id;
     private String fullName;
     private Timestamp createdAt;
 
-    public Long getId() {
+
+    public Author (int id, String fullName) {
+        this.id = id;
+        this.fullName = fullName;
+    }
+    public Author (String fullName) {
+        this.fullName = fullName;
+    }
+
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -33,6 +43,6 @@ public class Author {
 
     @Override
     public String toString() {
-        return fullName;
+        return "ID: " + id + "\nFull Name: " + fullName;
     }
 }

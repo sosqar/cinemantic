@@ -1,16 +1,12 @@
 package org.example;
 
-import org.example.model.Genre;
-import org.example.repository.GenreRepository;
+import org.example.impl.UserRepositoryImpl;
 
 
 public class Main {
     public static void main(String[] args) {
-        GenreRepository gr = new GenreRepository();
-
-
-        System.out.println(gr.findByName("Romance"));
+        UserRepositoryImpl uri = new UserRepositoryImpl();
+        System.out.println(uri.showAll());
     }
 }
-
 
