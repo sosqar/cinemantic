@@ -1,12 +1,14 @@
 package org.example;
 
 import org.example.impl.UserRepositoryImpl;
+import org.example.model.User;
 
 
 public class Main {
     public static void main(String[] args) {
         UserRepositoryImpl uri = new UserRepositoryImpl();
-        System.out.println(uri.update("bb2860cf-66f7-455e-829d-7d5629e3", "askar.alyiev"));
+        uri.create("askar.aly");
+        System.out.println();
     }
 }
 
