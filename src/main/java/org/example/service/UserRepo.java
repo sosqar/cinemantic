@@ -4,12 +4,12 @@ import org.example.model.User;
 
 import java.util.List;
 
-public interface UserRepository {
+public interface UserRepo {
     User create(String username);
     User update(String id, String username);
     User findById(String id);
     User findByUsername(String username);
-    User deleteById(String id);
+    String getUserIdByUsername(String username);
     User deleteByUsername(String username);
     List<User> showAll();
 

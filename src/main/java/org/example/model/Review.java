@@ -5,14 +5,21 @@ import java.sql.Timestamp;
 public class Review {
 
     private String id;
-    private int userId;
-    private int filmId;
+    private String userId;
+    private String filmId;
     private int value;
     private String description;
     private Timestamp createdAt;
 
-    final int min = 1;
-    final int max = 10;
+    public Review(String id, String userId, String filmId, int value, String description, Timestamp createdAt) {
+        this.id = id;
+        this.userId = userId;
+        this.filmId = filmId;
+        this.value = value;
+        this.description = description;
+        this.createdAt = createdAt;
+    }
+
 
     public String getId() {
         return id;
@@ -22,19 +29,19 @@ public class Review {
         this.id = id;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public int getFilmId() {
+    public String getFilmId() {
         return filmId;
     }
 
-    public void setFilmId(int filmId) {
+    public void setFilmId(String filmId) {
         this.filmId = filmId;
     }
 

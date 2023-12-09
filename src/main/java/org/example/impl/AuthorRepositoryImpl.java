@@ -16,7 +16,6 @@ public class AuthorRepositoryImpl implements AuthorRepository{
     private static final String SQL_FIND_BY_NAME = "select * from authors where fullName = ?";
     private static final String SQL_IS_FULLNAME_UNIQUE = "select count(*) from authors where fullName = ?";
 
-
     public Author findByName(String query) {
         try (Connection connection = ConnectionManager.getConnect(); PreparedStatement preparedStatement =
                 connection.prepareStatement(SQL_FIND_BY_NAME)) {
@@ -35,7 +34,6 @@ public class AuthorRepositoryImpl implements AuthorRepository{
         }
         return null;
     }
-
 
     private boolean isAuthorNameUnique(String fullName) {
         try (Connection connection = ConnectionManager.getConnect();

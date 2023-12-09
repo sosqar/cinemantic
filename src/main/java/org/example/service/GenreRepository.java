@@ -12,5 +12,5 @@ public interface GenreRepository {
     Genre findByName(String username);
     Genre deleteById(String id);
     void deleteByUsername(String username);
-    List<User> showAll();
+    List<Genre> showAll();
 }

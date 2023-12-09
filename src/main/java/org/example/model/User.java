@@ -1,7 +1,6 @@
 package org.example.model;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
 public class User {
     private String id;

@@ -2,14 +2,14 @@ package org.example.impl;
 
 import org.example.config.ConnectionManager;
 import org.example.model.Film;
-import org.example.service.FilmRepository;
+import org.example.service.FilmRepo;
 
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FilmRepositoryImpl implements FilmRepository{
-    private final Logger LOGGER = Logger.getLogger(FilmRepository.class.getName());
+public class FilmRepoImpl implements FilmRepo {
+    private final Logger LOGGER = Logger.getLogger(FilmRepo.class.getName());
     private static final String SQL_SAVE = "insert into films (title, genre, author, description, votes) VALUES " +
             "(?, ?, ?, ?, ?)";
     private static final String SQL_FIND_BY_TITLE = "select * from films where title =?";
@@ -88,7 +88,26 @@ public class FilmRepositoryImpl implements FilmRepository{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
+    }
 
+    public String getFilmIdByTitle(String title) {
+        try (Connection connection = ConnectionManager.getConnect();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_TITLE)) {
+            preparedStatement.setString(1, title);
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("id");
+                } else {
+                    LOGGER.warning("Фильм с таким названием " + title + " не найден.");
+                }
+            } catch (SQLException e) {
+                LOGGER.log(Level.SEVERE, "Ошибка при обработке результата запроса", e);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Произошла ошибка при выполнении запроса", e);
+        }
         return null;
     }
 
